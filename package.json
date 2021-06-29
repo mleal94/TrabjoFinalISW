@@ -1,0 +1,34 @@
+{
+  "name": "proyecto-jesus",
+  "version": "1.0.0",
+  "description": "Sistema para la gestión del proceso de certificación de roles.",
+  "main": "src/Application/Application.js",
+  "scripts": {
+    "dev": "nodemon src/Application/Application.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mleal94/TrabjoFinalISW.git"
+  },
+  "keywords": [
+    "ISW"
+  ],
+  "author": "Jesús Alejandro Bello González",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mleal94/TrabjoFinalISW/issues"
+  },
+  "homepage": "https://github.com/mleal94/TrabjoFinalISW#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.8",
+    "eslint": "^7.8.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
+  }
+}
