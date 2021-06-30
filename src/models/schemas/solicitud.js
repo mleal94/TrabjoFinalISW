@@ -1,11 +1,20 @@
 const { model, Schema } = require('mongoose');
-const Student = require('./estudiante');
 
 const Request = new Schema({
 
-  applicant: {
-    type: Student,
-  },
+    name: {
+        type: String,
+        required: true,
+    },
+    lastname: {
+        type: String,
+        required: true,
+    },
+    dni: {
+        type: String,
+        required: true,
+        unique:true
+    },
   role: {
     type: String,
   },

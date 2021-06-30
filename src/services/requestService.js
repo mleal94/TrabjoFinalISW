@@ -1,10 +1,12 @@
 const Request = require('../models/schemas/solicitud');
 
 const createRequest = async (req, res) => {
-  const { applicant, role } = req.body;
-  if (!applicant || !role) return res.status(400).json({ msg: 'Parámetros Faltantes' });
+  const { name,lastname, dni, role } = req.body;
+  if (!name || !role) return res.status(400).json({ msg: 'Parámetros Faltantes' });
   const newRequest = new Request({
-    applicant,
+    name,
+    dni,
+    lastname,
     role,
   });
   try {
@@ -28,7 +30,9 @@ const getRequestByRole = async (req, res) => {
   try {
     const { search: { role } } = req.body;
     const request = await Request.findOne({ role });
-    return res.status(200).json(request);
+    if (!request || request === null){
+      return res.status(200).json({ msg: 'No se ha encontrado la solicitud' });
+    }
   } catch (err) {
     return res.status(400).json({ msg: 'No se ha encontrado la solicitud' });
   }
@@ -37,7 +41,10 @@ const getRequestByRole = async (req, res) => {
 const getRequestByStudentName = async (req, res) => {
   try {
     const { search: { name } } = req.body;
-    const request = await Request.findOne({ 'applicant.name': name });
+    const request = await Request.findOne({ name });
+    if (!request || request === null){
+      return res.status(200).json({ msg: 'No se ha encontrado la solicitud' });
+    }
     return res.status(200).json(request);
   } catch (err) {
     return res.status(400).json({ msg: 'No se ha encontrado la solicitud' });
@@ -46,8 +53,8 @@ const getRequestByStudentName = async (req, res) => {
 
 const removeRequest = async (req, res) => {
   try {
-    const { id } = req.body;
-    await Request.remove({ _id: id });
+    const { id } = req.params;
+    await Request.deleteOne({ _id: id });
     return res.status(200).json({ deleted: true });
   } catch (err) {
     return res.status(400).json({ msg: 'No se ha encontrado la solicitud' });
